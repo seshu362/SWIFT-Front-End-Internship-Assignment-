@@ -1,4 +1,3 @@
-// ============= src/components/Dashboard/index.js =============
 import React, {useState, useEffect} from 'react'
 import { FiSearch } from "react-icons/fi";
 import Header from '../Header'

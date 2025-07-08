@@ -1,4 +1,3 @@
-// ============= src/components/CommentsTable/index.js =============
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
 import './index.css'
@@ -14,7 +13,6 @@ const CommentsTable = ({comments, sortConfig, onSort}) => {
   }
 
   const handleRowClick = (postId) => {
-    // Navigate to profile with the original postId as userId
     navigate(`/profile/${postId}`)
   }
 
