@@ -1,70 +1,151 @@
-# Getting Started with Create React App
+# Comments Dashboard Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based dashboard application for managing and viewing comments with user profiles. This application provides a paginated comments table with search, sort, and filtering capabilities, along with user profile management.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Dashboard (Comments Screen)
+- **Data Grid**: Displays 500 comments from JSONPlaceholder API in a paginated table
+- **Custom Pagination**: Implemented without external libraries with page size options (10, 50, 100)
+- **Search Functionality**: Partial search across name, email, and comment body
+- **Sorting**: Custom sorting for Post ID, Name, and Email with three-state cycle (no sort → ascending → descending → no sort)
+- **State Persistence**: Search, sort, pagination, and page size settings persist across page refreshes using localStorage
+- **Responsive Design**: Mobile-optimized interface
 
-### `npm start`
+### Profile Screen
+- **User Data**: Displays user information from JSONPlaceholder Users API
+- **Dynamic User ID**: Generates formatted user IDs based on user data
+- **Navigation**: Seamless routing between dashboard and profile screens
+- **User Avatar**: Displays user initials in avatar format
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technical Specifications
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Built With
+- **React** (Functional Components with Hooks)
+- **React Router DOM** for navigation
+- **React Icons** for UI icons
+- **CSS** for styling
+- **JSONPlaceholder API** for dummy data
 
-### `npm test`
+### Key Components
+- `Dashboard`: Main comments management interface
+- `Profile`: User profile display component
+- `CommentsTable`: Reusable table component with sorting
+- `Pagination`: Custom pagination component
+- `Header`: Navigation header with user info
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd comments-dashboard
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install dependencies:
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Start the development server:
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-### `npm run eject`
+## Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+src/
+├── components/
+│   ├── Dashboard/
+│   │   ├── index.js
+│   │   └── index.css
+│   ├── Profile/
+│   │   ├── index.js
+│   │   └── index.css
+│   ├── CommentsTable/
+│   │   ├── index.js
+│   │   └── index.css
+│   ├── Pagination/
+│   │   ├── index.js
+│   │   └── index.css
+│   └── Header/
+│       ├── index.js
+│       └── index.css
+├── App.js
+├── App.css
+└── index.js
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## API Endpoints
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Comments**: `https://jsonplaceholder.typicode.com/comments`
+- **Users**: `https://jsonplaceholder.typicode.com/users/{id}`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Usage
 
-## Learn More
+### Dashboard Navigation
+- Access the main dashboard at `/`
+- Click on any comment row to navigate to the user profile
+- Use the search bar to filter comments by name, email, or content
+- Sort columns by clicking on column headers
+- Navigate between pages using pagination controls
+- Change page size using the dropdown selector
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Profile Navigation
+- Access profile directly at `/profile` (shows user ID 1)
+- Access specific user profile at `/profile/{userId}`
+- Click "Welcome, {username}" to return to dashboard
+- View user details including formatted User ID, contact info, and address
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### State Persistence
+The application automatically saves and restores:
+- Search terms
+- Sort configuration (column and direction)
+- Current page number
+- Page size selection
 
-### Code Splitting
+## Key Features Implementation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Custom Pagination
+- No external pagination libraries used
+- Implements page navigation with Previous/Next buttons
+- Dynamic page number display based on current page
+- Configurable page sizes (10, 50, 100 items per page)
 
-### Analyzing the Bundle Size
+### Search Functionality
+- Real-time search across multiple fields
+- Case-insensitive partial matching
+- Searches name, email, and comment body simultaneously
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Sorting Logic
+- Three-state sorting cycle for each column
+- Only one column can be sorted at a time
+- Visual indicators (↑/↓) show current sort direction
+- Sorts by display Post ID (formatted) rather than original API ID
 
-### Making a Progressive Web App
+### Responsive Design
+- Mobile-friendly interface
+- Adaptive layout for different screen sizes
+- Touch-friendly navigation elements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Browser Compatibility
 
-### Advanced Configuration
+Tested and compatible with:
+- Google Chrome
+- Mozilla Firefox
+- Microsoft Edge
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Development Notes
 
-### Deployment
+### Data Transformation
+- Post IDs are transformed from API response (1, 2, 3...) to display format (12345670, 12345671, 12345672...)
+- User IDs are formatted using a combination of original ID and name-based hash
+- Comments are truncated to 100 characters for table display
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Performance Considerations
+- Efficient filtering and sorting algorithms
+- Minimal re-renders using React hooks
+- Optimized pagination to handle large datasets
